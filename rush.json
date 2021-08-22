@@ -1,0 +1,35 @@
+/**
+ * This is the main configuration file for Rush.
+ * For full documentation, please see https://rushjs.io
+ *
+ * 完整选项,请查看: https://rushjs.io/pages/configs/rush_json/
+ */
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.51.1",
+  "pnpmVersion": "6.13.0",
+  "pnpmOptions": {
+    // "pnpmStore": "local"
+    /**
+     * 严格检查对等依赖项
+     *
+     * 当使用淘宝源 https://registry.npm.taobao.org
+     * 并且包含可选依赖`A`,而 package.json 中又没有显式依赖`A`
+     * 在开启次选项的情况下,安装会报错
+     *
+     * https://github.com/cnpm/cnpmjs.org/issues/1584
+     */
+    // "strictPeerDependencies": true,
+    // "resolutionStrategy": "fast",
+    // "preventManualShrinkwrapChanges": true,
+    "useWorkspaces": true
+  },
+  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0",
+  "ensureConsistentVersions": true,
+  "projects": [
+    {
+      "packageName": "front-end",
+      "projectFolder": "apps/front-end"
+    }
+  ]
+}

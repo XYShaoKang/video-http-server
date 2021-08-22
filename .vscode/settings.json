@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "rush.json": "jsonc",
+    "**/common/config/rush/*.json": "jsonc"
+  },
+  "eslint.format.enable": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "typescript.tsdk": "./common/temp/node_modules/typescript/lib"
+}
