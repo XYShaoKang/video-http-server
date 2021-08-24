@@ -1,21 +1,46 @@
 {
   "name": "video-http-server",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "bin": {
+    "video-http-server": "./index.js"
+  },
   "scripts": {
-    "start": "nodemon index.js",
+    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
+    "build": "rimraf lib/* && tsc",
+    "lint": "yarn lint:prettier && yarn lint:eslint",
+    "lint:prettier": "prettier --check src",
+    "lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "XYShaoKang",
   "license": "ISC",
   "dependencies": {
-    "koa": "~2.13.1",
-    "nodemon": "~2.0.12",
     "@koa/router": "~10.1.1",
+    "koa": "~2.13.1",
     "koa-bodyparser": "~4.3.0",
-    "mime-types": "~2.1.32",
-    "koa-static": "~5.0.0"
+    "koa-static": "~5.0.0",
+    "mime-types": "~2.1.32"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.4",
+    "@types/koa-bodyparser": "^4.3.3",
+    "@types/koa-static": "^4.0.2",
+    "@types/koa__router": "^8.0.7",
+    "@types/mime-types": "^2.1.1",
+    "@types/node": "^16.7.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "~2.0.12",
+    "prettier": "^2.3.2",
+    "rimraf": "~3.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "4.4.1-rc",
+    "tslib": "~2.3.1"
   }
 }

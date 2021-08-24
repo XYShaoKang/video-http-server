@@ -1,16 +1,33 @@
-const fs = require('fs')
-const path = require('path')
-const mime = require('mime-types')
-const Router = require('@koa/router')
+import fs from 'fs'
+import path from 'path'
+import mime from 'mime-types'
+import Router from '@koa/router'
 
 const router = new Router()
 
 const INLUDE_TYPEs = new Set(['video/mp4'])
-const VIDEO_PATH = path.join(__dirname, './videos/')
+const VIDEO_PATH = path.join(__dirname, '../videos/')
 
-function getInfo(absolutePath) {
+type DirInfo = {
+  isDirectory: true
+  list: Array<
+    | { name: string; isDirectory: boolean }
+    | { name: string; type: string; relativePath: string }
+  >
+}
+
+type FileInfo = {
+  isDirectory: false
+  mimetype: string
+  filename: string
+  size: number
+}
+
+type Info = DirInfo | FileInfo
+
+function getInfo(absolutePath: string): Info {
   const stat = fs.statSync(absolutePath)
-  let list = []
+  const list = []
   const isDirectory = stat.isDirectory()
   if (isDirectory) {
     const tempList = fs.readdirSync(absolutePath)
@@ -24,7 +41,7 @@ function getInfo(absolutePath) {
         })
       } else {
         const type = mime.lookup(tempPath)
-        if (INLUDE_TYPEs.has(type)) {
+        if (type && INLUDE_TYPEs.has(type)) {
           list.push({
             name: tempList[i],
             type,
@@ -37,20 +54,20 @@ function getInfo(absolutePath) {
     return { isDirectory, list }
   } else {
     const filename = path.basename(absolutePath)
-    const mimetype = mime.contentType(filename)
+    const mimetype = mime.contentType(filename) || 'application/octet-stream'
     return { isDirectory, mimetype, filename, size: stat.size }
   }
 }
 
-router.get('/dir', async (ctx, next) => {
+router.get('/dir', async (ctx, _next) => {
   const { relativePath } = ctx.query
-  if (relativePath) {
+  if (relativePath && typeof relativePath === 'string') {
     const absolutePath = path.join(VIDEO_PATH, relativePath)
-    const { isDirectory, list } = getInfo(absolutePath)
-    if (isDirectory) {
+    const info = getInfo(absolutePath)
+    if (info.isDirectory) {
       ctx.response.body = {
         msg: 'ok',
-        list,
+        list: info.list,
       }
     } else {
       ctx.response.body = {
@@ -64,22 +81,23 @@ router.get('/dir', async (ctx, next) => {
   }
 })
 
-router.get('/file', async (ctx, next) => {
+router.get('/file', async (ctx, _next) => {
   const { relativePath } = ctx.query
-  if (relativePath) {
+  if (relativePath && typeof relativePath === 'string') {
     const absolutePath = path.join(VIDEO_PATH, relativePath)
-    const { isDirectory, mimetype, filename, size } = getInfo(absolutePath)
-    if (isDirectory) {
+    const info = getInfo(absolutePath)
+    if (info.isDirectory) {
       ctx.response.body = {
         error: 'not is file',
       }
     } else {
-      let range = ctx.header.range,
-        start = 0,
+      const { mimetype, size } = info
+      const range = ctx.header.range
+      let start = 0,
         end = size - 1,
         chunksize = size
       if (range) {
-        let parts = range.replace(/bytes=/, '').split('-')
+        const parts = range.replace(/bytes=/, '').split('-')
         start = parseInt(parts[0], 10)
         end = parts[1] ? parseInt(parts[1], 10) : size - 1
         chunksize = end - start + 1
@@ -90,7 +108,7 @@ router.get('/file', async (ctx, next) => {
       }
       ctx.set('Content-Type', mimetype)
       ctx.set('Accept-Ranges', 'bytes')
-      ctx.set('Content-Length', chunksize)
+      ctx.set('Content-Length', String(chunksize))
       ctx.body = fs.createReadStream(absolutePath, { start, end })
     }
   } else {
@@ -100,4 +118,4 @@ router.get('/file', async (ctx, next) => {
   }
 })
 
-module.exports = { router }
+export { router }
