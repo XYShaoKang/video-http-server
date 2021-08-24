@@ -5,9 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch CLI",
+      "program": "${workspaceFolder}/apps/video-http-server/src/index.ts",
+      "outFiles": ["${workspaceFolder}/apps/video-http-server/lib/**/*.js"]
+    },
+    {
       "type": "pwa-chrome",
       "request": "launch",
-      "name": "Launch Edge against localhost",
+      "name": "Launch Chrome against localhost",
       "url": "http://localhost:9000",
       "webRoot": "${workspaceFolder}/apps/front-end",
       "sourceMaps": true
