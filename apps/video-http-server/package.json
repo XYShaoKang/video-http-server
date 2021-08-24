@@ -1,0 +1,21 @@
+{
+  "name": "video-http-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "XYShaoKang",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "~2.13.1",
+    "nodemon": "~2.0.12",
+    "@koa/router": "~10.1.1",
+    "koa-bodyparser": "~4.3.0",
+    "mime-types": "~2.1.32",
+    "koa-static": "~5.0.0"
+  }
+}

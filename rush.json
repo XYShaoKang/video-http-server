@@ -30,6 +30,10 @@
     {
       "packageName": "front-end",
       "projectFolder": "apps/front-end"
+    },
+    {
+      "packageName": "video-http-server",
+      "projectFolder": "apps/video-http-server"
     }
   ]
 }
