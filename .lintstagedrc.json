@@ -1,0 +1,4 @@
+{
+  "apps/**/*.{ts,tsx}": ["eslint --fix --color", "prettier --write"],
+  "apps/**/*.md": ["prettier --write"]
+}
