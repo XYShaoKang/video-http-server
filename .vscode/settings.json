@@ -13,6 +13,10 @@
     }
   ],
   "eslint.format.enable": true,
+  "eslint.packageManager": "pnpm",
+  "npm.packageManager": "pnpm",
+  "eslint.nodePath": "common/autoinstallers/rush-lint/node_modules/eslint",
+  "prettier.prettierPath": "common/autoinstallers/rush-lint/node_modules/prettier",
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
