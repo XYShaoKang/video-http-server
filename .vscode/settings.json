@@ -3,6 +3,15 @@
     "rush.json": "jsonc",
     "**/common/config/rush/*.json": "jsonc"
   },
+  "vsicons.associations.files": [
+    {
+      "icon": "webpack",
+      "filenamesGlob": ["webpack.config"],
+      "extensionsGlob": ["mjs"],
+      "filename": true,
+      "format": "svg"
+    }
+  ],
   "eslint.format.enable": true,
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
