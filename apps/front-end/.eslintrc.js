@@ -69,7 +69,21 @@ const eslintConfig = {
         patterns: ['!styled-components/macro'],
       },
     ],
+
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-member-accessibility': 'off',
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': ['error'],
+        '@typescript-eslint/explicit-function-return-type': ['error'],
+        '@typescript-eslint/explicit-member-accessibility': ['error'],
+      },
+    },
+  ],
 }
 
 module.exports = eslintConfig
