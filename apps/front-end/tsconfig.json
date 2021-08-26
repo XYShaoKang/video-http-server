@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -17,5 +16,5 @@
     "jsx": "preserve",
     "downlevelIteration": true
   },
-  "include": ["src", "./src/setupTests.ts"]
+  "include": ["src"]
 }
