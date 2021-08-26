@@ -6,8 +6,8 @@
   "author": "XYShaoKang",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve",
-    "build": "cross-env NODE_ENV=production webpack --progress",
+    "start": "webpack serve --node-env development",
+    "build": "webpack --node-env production --progress",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check src",
     "lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
@@ -37,7 +37,6 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-macros": "^3.1.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
-    "cross-env": "^7.0.3",
     "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
