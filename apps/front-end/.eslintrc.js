@@ -30,6 +30,36 @@ const eslintConfig = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    // ========================================
+    // 禁用某些对象的属性
+    // ========================================
+    'no-restricted-properties': [
+      'error',
+      { property: 'substring', message: 'Use .slice instead of .substring.' },
+      { property: 'substr', message: 'Use .slice instead of .substr.' },
+      {
+        object: 'assert',
+        property: 'equal',
+        message: 'Use assert.strictEqual instead of assert.equal.',
+      },
+      {
+        object: 'assert',
+        property: 'notEqual',
+        message: 'Use assert.notStrictEqual instead of assert.notEqual.',
+      },
+      {
+        object: 'assert',
+        property: 'deepEqual',
+        message: 'Use assert.deepStrictEqual instead of assert.deepEqual.',
+      },
+      {
+        object: 'assert',
+        property: 'notDeepEqual',
+        message:
+          'Use assert.notDeepStrictEqual instead of assert.notDeepEqual.',
+      },
+    ],
+
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
 
     // 当启用新的 JSX 转换时,可以关闭下面两条规则
@@ -79,7 +109,6 @@ const eslintConfig = {
       files: ['*.ts', '*.tsx'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': ['error'],
-        '@typescript-eslint/explicit-function-return-type': ['error'],
         '@typescript-eslint/explicit-member-accessibility': ['error'],
       },
     },
