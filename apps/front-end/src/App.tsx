@@ -1,15 +1,17 @@
 import React, { FC } from 'react'
-import styled from 'styled-components/macro'
+import { Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components/macro'
+import { defaultTheme } from './theme'
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`
+import Directory from './Directory'
 
 const App: FC = () => (
   <div>
-    <Title>Hello world!</Title>
+    <Routes>
+      <ThemeProvider theme={defaultTheme}>
+        <Route path="/*" element={<Directory />} />
+      </ThemeProvider>
+    </Routes>
   </div>
 )
 
