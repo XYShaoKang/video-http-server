@@ -13,6 +13,7 @@ importers:
       '@babel/preset-env': ^7.15.0
       '@babel/preset-react': ^7.14.5
       '@babel/preset-typescript': ^7.15.0
+      '@fontsource/roboto': ~4.5.0
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.0-rc.4
       '@svgr/webpack': ^5.5.0
       '@testing-library/dom': ^8.1.0
@@ -24,13 +25,13 @@ importers:
       '@types/react-dom': ^17.0.9
       '@types/styled-components': ^5.1.12
       '@types/testing-library__jest-dom': ~5.14.1
+      '@types/webpack-dev-server': ~4.0.3
       '@typescript-eslint/eslint-plugin': ^4.29.2
       '@typescript-eslint/parser': ^4.29.2
       babel-jest: ^27.0.6
       babel-loader: ^8.2.2
       babel-plugin-macros: ^3.1.0
       clean-webpack-plugin: ^4.0.0-alpha.0
-      cross-env: ^7.0.3
       css-loader: ^6.2.0
       eslint: ^7.32.0
       eslint-config-prettier: ^8.3.0
@@ -40,6 +41,7 @@ importers:
       eslint-plugin-react: ^7.24.0
       eslint-plugin-react-hooks: ^4.2.0
       file-loader: ^6.2.0
+      history: ~5.0.1
       html-webpack-plugin: ^5.3.2
       jest: ^27.0.6
       prettier: ^2.3.2
@@ -47,6 +49,7 @@ importers:
       react-dom: ^17.0.2
       react-is: 17.0.2
       react-refresh: ^0.10.0
+      react-router-dom: next
       style-loader: ^3.2.1
       styled-components: ^5.3.0
       typescript: 4.4.1-rc
@@ -54,10 +57,15 @@ importers:
       webpack-cli: ^4.8.0
       webpack-dev-server: ^4.0.0
       webpack-merge: ^5.8.0
+      whatwg-fetch: ~3.6.2
     dependencies:
+      '@fontsource/roboto': registry.nlark.com/@fontsource/roboto/4.5.0
+      history: registry.nlark.com/history/5.0.1
       react: registry.nlark.com/react/17.0.2
       react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
+      react-router-dom: registry.nlark.com/react-router-dom/6.0.0-beta.2_94912414cd94cc5bc891cce65dd59788
       styled-components: registry.nlark.com/styled-components/5.3.0_281a4fa50a045c9112baf635f3bc27a7
+      whatwg-fetch: 3.6.2
     devDependencies:
       '@babel/cli': registry.nlark.com/@babel/cli/7.14.8_@babel+core@7.15.0
       '@babel/core': registry.nlark.com/@babel/core/7.15.0
@@ -76,13 +84,13 @@ importers:
       '@types/react-dom': registry.nlark.com/@types/react-dom/17.0.9
       '@types/styled-components': registry.nlark.com/@types/styled-components/5.1.12
       '@types/testing-library__jest-dom': registry.nlark.com/@types/testing-library__jest-dom/5.14.1
+      '@types/webpack-dev-server': registry.nlark.com/@types/webpack-dev-server/4.0.3_webpack-cli@4.8.0
       '@typescript-eslint/eslint-plugin': registry.nlark.com/@typescript-eslint/eslint-plugin/4.29.2_53df6a39d9024ebdd2468232daf15a46
       '@typescript-eslint/parser': registry.nlark.com/@typescript-eslint/parser/4.29.2_f8ed5431742f75332c3083279db44140
       babel-jest: registry.nlark.com/babel-jest/27.0.6_@babel+core@7.15.0
       babel-loader: 8.2.2_080b9887a086cbf3e61f158e7c92b566
       babel-plugin-macros: registry.nlark.com/babel-plugin-macros/3.1.0
       clean-webpack-plugin: 4.0.0-alpha.0_webpack@5.51.1
-      cross-env: 7.0.3
       css-loader: registry.nlark.com/css-loader/6.2.0_webpack@5.51.1
       eslint: registry.nlark.com/eslint/7.32.0
       eslint-config-prettier: registry.nlark.com/eslint-config-prettier/8.3.0_eslint@7.32.0
@@ -1105,14 +1113,6 @@ packages:
 
   /create-require/1.1.1:
     resolution: {integrity: sha1-wdfo8eX2z8n/ZfnNNS03NIdWwzM=, tarball: create-require/download/create-require-1.1.1.tgz}
-    dev: true
-
-  /cross-env/7.0.3:
-    resolution: {integrity: sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=, tarball: cross-env/download/cross-env-7.0.3.tgz}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/7.0.3:
@@ -4486,6 +4486,10 @@ packages:
       iconv-lite: registry.nlark.com/iconv-lite/0.4.24
     dev: true
 
+  /whatwg-fetch/3.6.2:
+    resolution: {integrity: sha1-3O0k838mJO0CgXJdUdDi4/5nf4w=, tarball: whatwg-fetch/download/whatwg-fetch-3.6.2.tgz}
+    dev: false
+
   /whatwg-mimetype/2.3.0:
     resolution: {integrity: sha1-PUseAxLSB5h5+Cav8Y2+7KWWD78=, tarball: whatwg-mimetype/download/whatwg-mimetype-2.3.0.tgz}
     dev: true
@@ -5903,7 +5907,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: registry.nlark.com/regenerator-runtime/0.13.9
-    dev: true
 
   registry.nlark.com/@babel/template/7.14.5:
     resolution: {integrity: sha1-qbydizM1T/blWpxg0RCSAKaJdPQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@babel/template/download/@babel/template-7.14.5.tgz}
@@ -6004,6 +6007,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  registry.nlark.com/@fontsource/roboto/4.5.0:
+    resolution: {integrity: sha1-1vklZoumr0ZwfxBAxDr/SYuiBLs=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@fontsource/roboto/download/@fontsource/roboto-4.5.0.tgz}
+    name: '@fontsource/roboto'
+    version: 4.5.0
+    dev: false
 
   registry.nlark.com/@humanwhocodes/config-array/0.5.0:
     resolution: {integrity: sha1-FAeWfUxu7Nc4j4Os8er00Mbljvk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@humanwhocodes/config-array/download/@humanwhocodes/config-array-0.5.0.tgz}
@@ -6509,6 +6518,23 @@ packages:
       '@types/node': registry.nlark.com/@types/node/16.7.1
     dev: true
 
+  registry.nlark.com/@types/bonjour/3.5.9:
+    resolution: {integrity: sha1-PMTlE127WUD8YFFgSAkjRhL4nLQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/bonjour/download/@types/bonjour-3.5.9.tgz}
+    name: '@types/bonjour'
+    version: 3.5.9
+    dependencies:
+      '@types/node': registry.nlark.com/@types/node/16.7.1
+    dev: true
+
+  registry.nlark.com/@types/connect-history-api-fallback/1.3.5:
+    resolution: {integrity: sha1-0feooJ0O1aV67lrpwYq5uAMgXa4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/connect-history-api-fallback/download/@types/connect-history-api-fallback-1.3.5.tgz}
+    name: '@types/connect-history-api-fallback'
+    version: 1.3.5
+    dependencies:
+      '@types/express-serve-static-core': registry.nlark.com/@types/express-serve-static-core/4.17.24
+      '@types/node': registry.nlark.com/@types/node/16.7.1
+    dev: true
+
   registry.nlark.com/@types/connect/3.4.35:
     resolution: {integrity: sha1-X89q5EXkAh0fwiGaSHPMc6O7KtE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/connect/download/@types/connect-3.4.35.tgz}
     name: '@types/connect'
@@ -6820,6 +6846,14 @@ packages:
     version: 0.16.2
     dev: true
 
+  registry.nlark.com/@types/serve-index/1.9.1:
+    resolution: {integrity: sha1-G16FNwoZLAHsbOxHNc8pFzN6Yng=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/serve-index/download/@types/serve-index-1.9.1.tgz}
+    name: '@types/serve-index'
+    version: 1.9.1
+    dependencies:
+      '@types/express': registry.nlark.com/@types/express/4.17.13
+    dev: true
+
   registry.nlark.com/@types/serve-static/1.13.10:
     resolution: {integrity: sha1-9eDOh5fS18xevtpIpSyWxPpHqNk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/serve-static/download/@types/serve-static-1.13.10.tgz}
     name: '@types/serve-static'
@@ -6827,6 +6861,12 @@ packages:
     dependencies:
       '@types/mime': registry.nlark.com/@types/mime/1.3.2
       '@types/node': registry.nlark.com/@types/node/16.7.1
+    dev: true
+
+  registry.nlark.com/@types/source-list-map/0.1.2:
+    resolution: {integrity: sha1-AHiDYGP/rxdBI0m7o2QIfgrALsk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/source-list-map/download/@types/source-list-map-0.1.2.tgz}
+    name: '@types/source-list-map'
+    version: 0.1.2
     dev: true
 
   registry.nlark.com/@types/stack-utils/2.0.1:
@@ -6845,12 +6885,81 @@ packages:
       csstype: registry.nlark.com/csstype/3.0.8
     dev: true
 
+  registry.nlark.com/@types/tapable/1.0.8:
+    resolution: {integrity: sha1-uUpDkchWZse3Mpn9OtedT6pDUxA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/tapable/download/@types/tapable-1.0.8.tgz}
+    name: '@types/tapable'
+    version: 1.0.8
+    dev: true
+
   registry.nlark.com/@types/testing-library__jest-dom/5.14.1:
     resolution: {integrity: sha1-AUFipc7mVxgZ1I6ZmYBpTi9lfDw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/testing-library__jest-dom/download/@types/testing-library__jest-dom-5.14.1.tgz}
     name: '@types/testing-library__jest-dom'
     version: 5.14.1
     dependencies:
       '@types/jest': registry.nlark.com/@types/jest/27.0.1
+    dev: true
+
+  registry.nlark.com/@types/uglify-js/3.13.1:
+    resolution: {integrity: sha1-XoienoHpQkXHW2RQYA4cXqKHiuo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/uglify-js/download/@types/uglify-js-3.13.1.tgz}
+    name: '@types/uglify-js'
+    version: 3.13.1
+    dependencies:
+      source-map: 0.6.1
+    dev: true
+
+  registry.nlark.com/@types/webpack-dev-middleware/5.0.2_webpack-cli@4.8.0:
+    resolution: {integrity: sha1-D2ZWbCyn1ISJG0VSyKe2SjBE4+I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/webpack-dev-middleware/download/@types/webpack-dev-middleware-5.0.2.tgz}
+    id: registry.nlark.com/@types/webpack-dev-middleware/5.0.2
+    name: '@types/webpack-dev-middleware'
+    version: 5.0.2
+    dependencies:
+      '@types/connect': registry.nlark.com/@types/connect/3.4.35
+      tapable: 2.2.0
+      webpack: registry.nlark.com/webpack/5.51.1_webpack-cli@4.8.0
+    transitivePeerDependencies:
+      - webpack-cli
+    dev: true
+
+  registry.nlark.com/@types/webpack-dev-server/4.0.3_webpack-cli@4.8.0:
+    resolution: {integrity: sha1-D14+K6N8tS8TY96C9BrhQL0BfvM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/webpack-dev-server/download/@types/webpack-dev-server-4.0.3.tgz}
+    id: registry.nlark.com/@types/webpack-dev-server/4.0.3
+    name: '@types/webpack-dev-server'
+    version: 4.0.3
+    dependencies:
+      '@types/bonjour': registry.nlark.com/@types/bonjour/3.5.9
+      '@types/connect-history-api-fallback': registry.nlark.com/@types/connect-history-api-fallback/1.3.5
+      '@types/express': registry.nlark.com/@types/express/4.17.13
+      '@types/serve-index': registry.nlark.com/@types/serve-index/1.9.1
+      '@types/serve-static': registry.nlark.com/@types/serve-static/1.13.10
+      '@types/webpack': registry.nlark.com/@types/webpack/4.41.30
+      '@types/webpack-dev-middleware': registry.nlark.com/@types/webpack-dev-middleware/5.0.2_webpack-cli@4.8.0
+      chokidar: registry.nlark.com/chokidar/3.5.2
+      http-proxy-middleware: registry.nlark.com/http-proxy-middleware/1.3.1
+    transitivePeerDependencies:
+      - webpack-cli
+    dev: true
+
+  registry.nlark.com/@types/webpack-sources/3.2.0:
+    resolution: {integrity: sha1-FtdZuglsKJA0smVT0t8b9FJI04s=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/webpack-sources/download/@types/webpack-sources-3.2.0.tgz}
+    name: '@types/webpack-sources'
+    version: 3.2.0
+    dependencies:
+      '@types/node': registry.nlark.com/@types/node/16.7.1
+      '@types/source-list-map': registry.nlark.com/@types/source-list-map/0.1.2
+      source-map: 0.7.3
+    dev: true
+
+  registry.nlark.com/@types/webpack/4.41.30:
+    resolution: {integrity: sha1-/T220NQeFFqO7q/NPEp8zekGjdw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/webpack/download/@types/webpack-4.41.30.tgz}
+    name: '@types/webpack'
+    version: 4.41.30
+    dependencies:
+      '@types/node': registry.nlark.com/@types/node/16.7.1
+      '@types/tapable': registry.nlark.com/@types/tapable/1.0.8
+      '@types/uglify-js': registry.nlark.com/@types/uglify-js/3.13.1
+      '@types/webpack-sources': registry.nlark.com/@types/webpack-sources/3.2.0
+      anymatch: 3.1.2
+      source-map: 0.6.1
     dev: true
 
   registry.nlark.com/@types/yargs-parser/20.2.1:
@@ -8365,6 +8474,14 @@ packages:
     hasBin: true
     dev: true
 
+  registry.nlark.com/history/5.0.1:
+    resolution: {integrity: sha1-3jUCXtCLzg22I2S0frv52XtesGo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/history/download/history-5.0.1.tgz}
+    name: history
+    version: 5.0.1
+    dependencies:
+      '@babel/runtime': registry.nlark.com/@babel/runtime/7.15.3
+    dev: false
+
   registry.nlark.com/html-escaper/2.0.2:
     resolution: {integrity: sha1-39YAJ9o2o238viNiYsAKWCJoFFM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/html-escaper/download/html-escaper-2.0.2.tgz}
     name: html-escaper
@@ -8397,6 +8514,19 @@ packages:
       domhandler: 4.2.0
       domutils: registry.nlark.com/domutils/2.7.0
       entities: registry.nlark.com/entities/2.2.0
+    dev: true
+
+  registry.nlark.com/http-proxy-middleware/1.3.1:
+    resolution: {integrity: sha1-Q3ANbZ7st0Gb8IahKND3IF2etmU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/http-proxy-middleware/download/http-proxy-middleware-1.3.1.tgz}
+    name: http-proxy-middleware
+    version: 1.3.1
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      '@types/http-proxy': registry.nlark.com/@types/http-proxy/1.17.7
+      http-proxy: 1.18.1
+      is-glob: 4.0.1
+      is-plain-obj: 3.0.0
+      micromatch: 4.0.4
     dev: true
 
   registry.nlark.com/http-proxy-middleware/2.0.1:
@@ -9585,6 +9715,35 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  registry.nlark.com/react-router-dom/6.0.0-beta.2_94912414cd94cc5bc891cce65dd59788:
+    resolution: {integrity: sha1-8AH4YulHh4UzY92EXXA0CrVch0Q=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/react-router-dom/download/react-router-dom-6.0.0-beta.2.tgz}
+    id: registry.nlark.com/react-router-dom/6.0.0-beta.2
+    name: react-router-dom
+    version: 6.0.0-beta.2
+    peerDependencies:
+      history: '>=5'
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      history: registry.nlark.com/history/5.0.1
+      react: registry.nlark.com/react/17.0.2
+      react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
+      react-router: registry.nlark.com/react-router/6.0.0-beta.2_history@5.0.1+react@17.0.2
+    dev: false
+
+  registry.nlark.com/react-router/6.0.0-beta.2_history@5.0.1+react@17.0.2:
+    resolution: {integrity: sha1-fIBOTR+G6/05ftix4Fpj0kvzMT8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/react-router/download/react-router-6.0.0-beta.2.tgz}
+    id: registry.nlark.com/react-router/6.0.0-beta.2
+    name: react-router
+    version: 6.0.0-beta.2
+    peerDependencies:
+      history: '>=5'
+      react: '>=16.8'
+    dependencies:
+      history: registry.nlark.com/history/5.0.1
+      react: registry.nlark.com/react/17.0.2
+    dev: false
+
   registry.nlark.com/react/17.0.2:
     resolution: {integrity: sha1-0LXMUW0p6z7uOD91tihkz7aAADc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/react/download/react-17.0.2.tgz}
     name: react
@@ -9629,7 +9788,6 @@ packages:
     resolution: {integrity: sha1-iSV0Kpj/2QgUmI11Zq0wyjsmO1I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/regenerator-runtime/download/regenerator-runtime-0.13.9.tgz}
     name: regenerator-runtime
     version: 0.13.9
-    dev: true
 
   registry.nlark.com/regenerator-transform/0.14.5:
     resolution: {integrity: sha1-yY2hVGg2ccnE3LFuznNlF+G3/rQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/regenerator-transform/download/regenerator-transform-0.14.5.tgz}

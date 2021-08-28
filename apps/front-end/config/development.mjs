@@ -1,6 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -16,6 +17,7 @@ const development = {
     port: 9000,
     open: true,
     hot: true,
+    historyApiFallback: true,
     /**
      *
      * @param {import('webpack-dev-server')} devServer
@@ -30,19 +32,29 @@ const development = {
       devServer.app.get('/dir', function (req, res) {
         const { relativePath } = req.query
         if (relativePath === '/') {
+          const stat = fs.statSync(path.join(STATIC_PATH, 'demo.mp4'))
           res.json({
             msg: 'ok',
             children: [
               {
                 name: 'demo.mp4',
-                mimetype: 'video/mp4,',
+                mimetype: 'video/mp4',
                 path: '/demo.mp4',
+                modified: stat.ctime,
+                size: stat.size,
+              },
+              {
+                name: 'temp',
+                isDirectory: true,
+                path: '/temp',
+                modified: new Date('2021-08-26T13:27:41.750Z'),
               },
             ],
           })
         } else {
           res.json({
-            error: 'no found directory',
+            msg: 'ok',
+            children: [],
           })
         }
       })
