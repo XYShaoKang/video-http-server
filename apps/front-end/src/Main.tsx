@@ -22,28 +22,31 @@ const Header = styled.div`
 `
 
 interface FileType {
-  mimetype: string
   name: string
+  isDirectory: false
   path: string
   modified: string
+  mimetype: string
   size: number
 }
 interface DirectoryType {
   name: string
+  isDirectory: true
   path: string
-  isDirectory: boolean
   modified: string
 }
 
-type ItemType = FileType | DirectoryType
+type ItemInfo = (FileType | DirectoryType) & {
+  children?: Array<FileType | DirectoryType>
+}
 
 type StateType = Array<{
-  mimetype: string
   name: string
+  isDirectory: boolean
   path: string
   modified: string
+  mimetype: string
   size?: number
-  isDirectory?: boolean
 }>
 
 const Directory: FC = () => {
@@ -51,20 +54,25 @@ const Directory: FC = () => {
   const dirs = location.pathname.slice(1).split('/').filter(Boolean)
   dirs.unshift('root')
 
-  const [data, setData] = useState<StateType>([])
+  const [children, setChildren] = useState<StateType>([])
+  const [currentInfo, setCurrentInfo] = useState<FileType | DirectoryType>()
 
   useEffect(() => {
-    fetch(`/dir?relativePath=${location.pathname}`)
+    fetch(`/info?relativePath=${location.pathname}`)
       .then(res => res.json())
-      .then(({ msg, children }: { msg: string; children: Array<ItemType> }) => {
+      .then(({ msg, info }: { msg: string; info: ItemInfo }) => {
         if (msg === 'ok') {
-          setData(
-            children
-              .map(item =>
-                'isDirectory' in item ? { ...item, mimetype: 'Folder' } : item
-              )
-              .sort(a => ('isDirectory' in a ? -1 : 1))
-          )
+          const { children, ...tempInfo } = info
+          if (children) {
+            setChildren(
+              children
+                .map(item =>
+                  item.isDirectory ? { ...item, mimetype: 'Folder' } : item
+                )
+                .sort(a => (a.isDirectory ? -1 : 1))
+            )
+          }
+          setCurrentInfo(tempInfo)
         } else {
           throw new Error('获取目录数据失败')
         }
@@ -74,15 +82,17 @@ const Directory: FC = () => {
   return (
     <Container>
       <Header>
-        <Nav>
-          {dirs.map((name, i) => (
-            <Link to={dirs.slice(1, i + 1).join('/')} key={i}>
-              {name}
-            </Link>
-          ))}
-        </Nav>
+        {currentInfo && (
+          <Nav>
+            {dirs.map((name, i) => (
+              <Link to={dirs.slice(1, i + 1).join('/')} key={i}>
+                {name}
+              </Link>
+            ))}
+          </Nav>
+        )}
       </Header>
-      <List data={data} />
+      {currentInfo?.isDirectory && <List data={children} />}
     </Container>
   )
 }
