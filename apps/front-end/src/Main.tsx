@@ -6,6 +6,7 @@ import Nav from './Nav'
 import Link from './Link'
 import List from './List'
 import Error from './Error'
+import Player from './Player'
 import useInfo from './hooks/useInfo'
 
 const Container = styled.div`
@@ -25,6 +26,7 @@ const Header = styled.div`
 
 const Directory: FC = () => {
   const { pathname } = useLocation()
+  console.log(pathname)
 
   const { children, currentInfo, error } = useInfo(pathname)
 
@@ -44,7 +46,12 @@ const Directory: FC = () => {
           ))}
         </Nav>
       </Header>
-      {currentInfo?.isDirectory && <List data={children} />}
+      {currentInfo &&
+        (currentInfo.isDirectory ? (
+          <List data={children} />
+        ) : (
+          <Player info={currentInfo} />
+        ))}
       {error && <Error msg={error} />}
     </Container>
   )
