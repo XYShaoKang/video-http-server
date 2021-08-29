@@ -17,7 +17,7 @@ const development = {
     port: 9000,
     open: true,
     hot: true,
-    historyApiFallback: true,
+    historyApiFallback: { disableDotRule: true },
     /**
      *
      * @param {import('webpack-dev-server')} devServer
