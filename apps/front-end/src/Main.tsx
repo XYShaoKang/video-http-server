@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import Nav from './Nav'
 import Link from './Link'
 import List from './List'
+import Error from './Error'
 
 const Container = styled.div`
   width: 800px;
@@ -50,49 +51,62 @@ type StateType = Array<{
 }>
 
 const Directory: FC = () => {
-  const location = useLocation()
-  const dirs = location.pathname.slice(1).split('/').filter(Boolean)
-  dirs.unshift('root')
+  const { pathname } = useLocation()
 
   const [children, setChildren] = useState<StateType>([])
   const [currentInfo, setCurrentInfo] = useState<FileType | DirectoryType>()
+  const [error, setError] = useState<string>()
+
+  const path = error ? pathname : currentInfo?.path
+
+  const dirs = path?.slice(1).split('/').filter(Boolean) ?? []
+  dirs.unshift('root')
 
   useEffect(() => {
-    fetch(`/info?relativePath=${location.pathname}`)
+    fetch(`/info?relativePath=${pathname}`)
       .then(res => res.json())
-      .then(({ msg, info }: { msg: string; info: ItemInfo }) => {
-        if (msg === 'ok') {
-          const { children, ...tempInfo } = info
-          if (children) {
-            setChildren(
-              children
-                .map(item =>
-                  item.isDirectory ? { ...item, mimetype: 'Folder' } : item
-                )
-                .sort(a => (a.isDirectory ? -1 : 1))
-            )
+      .then(
+        (
+          data:
+            | {
+                msg: string
+                info: ItemInfo
+              }
+            | { error: string }
+        ) => {
+          if ('msg' in data && data.msg === 'ok') {
+            const { children, ...tempInfo } = data.info
+            if (children) {
+              setChildren(
+                children
+                  .map(item =>
+                    item.isDirectory ? { ...item, mimetype: 'Folder' } : item
+                  )
+                  .sort(a => (a.isDirectory ? -1 : 1))
+              )
+            }
+            setCurrentInfo(tempInfo)
+            setError(undefined)
+          } else if ('error' in data) {
+            setError(`获取 ${pathname} 目录数据失败,请检查路径`)
           }
-          setCurrentInfo(tempInfo)
-        } else {
-          throw new Error('获取目录数据失败')
         }
-      })
-  }, [location.pathname])
+      )
+  }, [pathname])
 
   return (
     <Container>
       <Header>
-        {currentInfo && (
-          <Nav>
-            {dirs.map((name, i) => (
-              <Link to={dirs.slice(1, i + 1).join('/')} key={i}>
-                {name}
-              </Link>
-            ))}
-          </Nav>
-        )}
+        <Nav>
+          {dirs.map((name, i) => (
+            <Link to={dirs.slice(1, i + 1).join('/')} key={i}>
+              {name}
+            </Link>
+          ))}
+        </Nav>
       </Header>
       {currentInfo?.isDirectory && <List data={children} />}
+      {error && <Error msg={error} />}
     </Container>
   )
 }
