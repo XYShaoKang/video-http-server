@@ -38,7 +38,7 @@ const infos = {
     info: {
       name: 'root',
       isDirectory: true,
-      path: '/',
+      path: '/temp',
       modified: demoStat.ctime,
       children: [
         {
