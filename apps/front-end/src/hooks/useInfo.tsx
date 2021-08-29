@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-interface FileType {
+export interface FileType {
   name: string
   isDirectory: false
   path: string
@@ -8,36 +8,35 @@ interface FileType {
   mimetype: string
   size: number
 }
-interface DirectoryType {
+export interface DirectoryType {
   name: string
   isDirectory: true
   path: string
   modified: string
 }
 
-type ItemInfo = (FileType | DirectoryType) & {
-  children?: Array<FileType | DirectoryType>
-}
+export type ItemType = FileType | DirectoryType
 
-type StateType = Array<{
+type ItemInfo = ItemType & { children?: Array<ItemType> }
+export interface StatType {
   name: string
   isDirectory: boolean
   path: string
   modified: string
   mimetype: string
   size?: number
-}>
+}
 
 const useInfo = (
   pathname: string
 ): {
-  currentInfo: FileType | DirectoryType | undefined
+  currentInfo: ItemType | undefined
   error: string | undefined
-  children: StateType
+  children: Array<StatType>
 } => {
-  const [currentInfo, setCurrentInfo] = useState<FileType | DirectoryType>()
+  const [currentInfo, setCurrentInfo] = useState<ItemType>()
   const [error, setError] = useState<string>()
-  const [children, setChildren] = useState<StateType>([])
+  const [children, setChildren] = useState<Array<StatType>>([])
 
   useEffect(() => {
     fetch(`/info?relativePath=${pathname}`)

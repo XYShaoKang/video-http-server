@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/macro'
+
 import Link from './Link'
 import Typography from './Typography'
+import { StatType } from './hooks/useInfo'
 
 const Container = styled.div`
   width: 100%;
@@ -45,14 +47,7 @@ const columns: Array<{ field: Field; name: string; width: number }> = [
 ]
 
 interface ListProps {
-  data: Array<{
-    mimetype: string
-    name: string
-    path: string
-    modified: string
-    size?: number
-    isDirectory?: boolean
-  }>
+  data: Array<StatType>
 }
 
 const List: FC<ListProps> = ({ data }) => {
@@ -68,7 +63,7 @@ const List: FC<ListProps> = ({ data }) => {
       <Body>
         {data.map((item, i) => (
           <Row
-            as={item.isDirectory ? Link : undefined}
+            as={Link}
             to={item.path}
             key={item.name}
             $showBackground={i % 2 === 0}
