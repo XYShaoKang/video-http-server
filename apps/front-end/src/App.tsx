@@ -3,13 +3,13 @@ import { Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components/macro'
 import { defaultTheme } from './theme'
 
-import Directory from './Directory'
+import Main from './Main'
 
 const App: FC = () => (
   <div>
     <Routes>
       <ThemeProvider theme={defaultTheme}>
-        <Route path="/*" element={<Directory />} />
+        <Route path="/*" element={<Main />} />
       </ThemeProvider>
     </Routes>
   </div>
