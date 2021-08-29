@@ -6,7 +6,7 @@ const List = styled.ol`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 0;
+  padding-left: 10px;
   margin: 0;
   list-style: none;
 `
