@@ -8,8 +8,12 @@
       "type": "node",
       "request": "launch",
       "name": "Launch CLI",
-      "program": "${workspaceFolder}/apps/video-http-server/src/index.ts",
-      "outFiles": ["${workspaceFolder}/apps/video-http-server/lib/**/*.js"]
+      "program": "${workspaceFolder}/apps/video-http-server/src/cli.ts",
+      "outFiles": ["${workspaceFolder}/apps/video-http-server/lib/**/*.js"],
+      "preLaunchTask": "tsc: build video-http-server",
+      "env": {
+        "VSCODE_BUGGER": "true"
+      }
     },
     {
       "type": "pwa-chrome",
