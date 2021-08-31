@@ -5,7 +5,6 @@ import serve from 'koa-static'
 import { router } from './router'
 
 const CLIENT_PATH = path.join(__dirname, '../../front-end/dist/')
-const PORT = 3000
 
 const app = new Koa()
 
@@ -23,6 +22,4 @@ app.on('error', error => {
   }
 })
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`)
-})
+export { app }

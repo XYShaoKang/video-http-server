@@ -10,7 +10,7 @@ const VIDEO_PATH = path.join(__dirname, '../videos/')
 
 type DirInfo = {
   isDirectory: true
-  list: Array<
+  children: Array<
     | { name: string; isDirectory: boolean }
     | { name: string; type: string; relativePath: string }
   >
@@ -51,7 +51,7 @@ function getInfo(absolutePath: string): Info {
       }
     }
 
-    return { isDirectory, list }
+    return { isDirectory, children: list }
   } else {
     const filename = path.basename(absolutePath)
     const mimetype = mime.contentType(filename) || 'application/octet-stream'
@@ -67,7 +67,7 @@ router.get('/dir', async (ctx, _next) => {
     if (info.isDirectory) {
       ctx.response.body = {
         msg: 'ok',
-        list: info.list,
+        children: info.children,
       }
     } else {
       ctx.response.body = {
@@ -76,7 +76,7 @@ router.get('/dir', async (ctx, _next) => {
     }
   } else {
     ctx.response.body = {
-      msg: 'lack relativePath',
+      error: 'lack relativePath',
     }
   }
 })
@@ -113,7 +113,7 @@ router.get('/file', async (ctx, _next) => {
     }
   } else {
     ctx.response.body = {
-      msg: 'lack relativePath',
+      error: 'lack relativePath',
     }
   }
 })
