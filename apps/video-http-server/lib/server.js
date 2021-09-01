@@ -8,11 +8,13 @@ const koa_bodyparser_1 = (0, tslib_1.__importDefault)(require("koa-bodyparser"))
 const koa_static_1 = (0, tslib_1.__importDefault)(require("koa-static"));
 const router_1 = require("./router");
 const CLIENT_PATH = path_1.default.join(__dirname, '../../front-end/dist/');
+const ROOT_PATH = path_1.default.join(__dirname, '../videos/');
+const router = (0, router_1.createRoute)(ROOT_PATH);
 const app = new koa_1.default();
 exports.app = app;
 app.use((0, koa_bodyparser_1.default)());
 app.use((0, koa_static_1.default)(CLIENT_PATH));
-app.use(router_1.router.routes()).use(router_1.router.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods());
 app.on('error', error => {
     // TODO: 暂时先使用警告来代替错误
     // https://github.com/koajs/koa/issues/1089
