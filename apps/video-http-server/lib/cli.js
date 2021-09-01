@@ -5,7 +5,7 @@ const yargs_1 = (0, tslib_1.__importDefault)(require("yargs"));
 const helpers_1 = require("yargs/helpers");
 const os_1 = (0, tslib_1.__importDefault)(require("os"));
 const chalk_1 = (0, tslib_1.__importDefault)(require("chalk"));
-const http_1 = (0, tslib_1.__importDefault)(require("http"));
+const path_1 = (0, tslib_1.__importDefault)(require("path"));
 const server_1 = require("./server");
 const utils_1 = require("./utils");
 const ifaces = os_1.default.networkInterfaces();
@@ -13,6 +13,11 @@ const DEFAULT_PORT = 9011;
 const DEFAULT_HOST = '0.0.0.0';
 (0, yargs_1.default)((0, helpers_1.hideBin)(process.argv))
     .options({
+    root: {
+        default: './',
+        describe: 'root path',
+        string: true,
+    },
     port: {
         alias: 'p',
         default: DEFAULT_PORT,
@@ -23,12 +28,14 @@ const DEFAULT_HOST = '0.0.0.0';
         alias: 'h',
         default: DEFAULT_HOST,
         describe: 'server host',
+        string: true,
     },
 })
-    .command(['server', '$0'], '启动一个视频服务器', () => {
+    .command(['server [root]', '$0'], '启动一个视频服务器', () => {
     //
-}, ({ host, port }) => {
-    const server = http_1.default.createServer(server_1.app.callback());
+}, ({ host, port, root = '' }) => {
+    const rootPath = path_1.default.join(process.cwd(), root);
+    const server = (0, server_1.createServer)(rootPath);
     server.on('close', () => {
         // console.log('server close')
     });

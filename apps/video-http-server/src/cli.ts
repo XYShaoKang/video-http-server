@@ -2,9 +2,9 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import os from 'os'
 import chalk from 'chalk'
-import http from 'http'
+import path from 'path'
 
-import { app } from './server'
+import { createServer } from './server'
 import { extractIpv4Address, print } from './utils'
 
 const ifaces = os.networkInterfaces()
@@ -14,6 +14,11 @@ const DEFAULT_HOST = '0.0.0.0'
 
 yargs(hideBin(process.argv))
   .options({
+    root: {
+      default: './',
+      describe: 'root path',
+      string: true,
+    },
     port: {
       alias: 'p',
       default: DEFAULT_PORT,
@@ -24,16 +29,19 @@ yargs(hideBin(process.argv))
       alias: 'h',
       default: DEFAULT_HOST,
       describe: 'server host',
+      string: true,
     },
   })
-  .command(
-    ['server', '$0'],
+  .command<{ host: string; port: number; root: string }>(
+    ['server [root]', '$0'],
     '启动一个视频服务器',
     () => {
       //
     },
-    ({ host, port }) => {
-      const server = http.createServer(app.callback())
+    ({ host, port, root = '' }) => {
+      const rootPath = path.join(process.cwd(), root)
+
+      const server = createServer(rootPath)
 
       server.on('close', () => {
         // console.log('server close')
