@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/cli.ts",
-    "build": "rimraf lib/* && tsc",
+    "build": "rimraf lib/* && tsc -p tsconfig.build.json",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check src",
     "lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
