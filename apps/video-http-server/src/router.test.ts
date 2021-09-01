@@ -135,3 +135,18 @@ test('route file info', async () => {
     },
   })
 })
+
+test('route file', async () => {
+  const app = new Koa()
+  app.use(router.routes())
+
+  const response = await request(http.createServer(app.callback())).get(
+    '/file?relativePath=/demo.mp4'
+  )
+
+  expect(response.status).toBe(200)
+  expect(response.headers['content-type']).toBe('video/mp4')
+  expect(response.headers['accept-ranges']).toBe('bytes')
+  expect(response.headers['content-length']).toBe('3')
+  expect(demoStat.content.equals(response.body)).toEqual(true)
+})
