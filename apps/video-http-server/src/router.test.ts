@@ -4,13 +4,11 @@ import http from 'http'
 import path from 'path'
 import mock, { directory, file } from 'mock-fs'
 import { Buffer } from 'buffer'
-import { Console } from 'console'
 
-import { router, getInfoWithVideoPath } from './router'
+import { createRoute } from './router'
 
-// https://github.com/tschaub/mock-fs/issues/234#issuecomment-703740305
-// eslint-disable-next-line no-global-assign
-console = new Console(process.stdout, process.stderr)
+const ROOT_PATH = path.join(__dirname, '../videos/')
+const router = createRoute(ROOT_PATH)
 
 const demoStat = {
   ctime: new Date(),
@@ -43,33 +41,6 @@ beforeEach(() => {
 
 afterEach(() => {
   mock.restore()
-})
-
-test('getInfoWithVideoPath', async () => {
-  const info = getInfoWithVideoPath(path.join(__dirname, '../videos/'))
-  process.stdout.write(typeof info.modified + '\n')
-  expect(info).toEqual({
-    name: 'root',
-    isDirectory: true,
-    path: '/',
-    modified: demoStat.ctime,
-    children: [
-      {
-        name: 'demo.mp4',
-        isDirectory: false,
-        path: '/demo.mp4',
-        modified: demoStat.ctime,
-        mimetype: 'video/mp4',
-        size: demoStat.size,
-      },
-      {
-        name: 'temp',
-        isDirectory: true,
-        path: '/temp',
-        modified: demoStat.ctime,
-      },
-    ],
-  })
 })
 
 test('route dir info', async () => {

@@ -2,9 +2,12 @@ import path from 'path'
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import serve from 'koa-static'
-import { router } from './router'
+import { createRoute } from './router'
 
 const CLIENT_PATH = path.join(__dirname, '../../front-end/dist/')
+
+const ROOT_PATH = path.join(__dirname, '../videos/')
+const router = createRoute(ROOT_PATH)
 
 const app = new Koa()
 
