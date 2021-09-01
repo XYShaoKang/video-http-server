@@ -17,8 +17,9 @@ declare type FileInfo = {
 declare type Info = DirInfo | FileInfo;
 /**
  *
- * @param parentPath 当前路径,相对路径
+ * @param rootPath Web 的根目录,绝对路径,用来定位当前路径
+ * @param currentPath 当前路径,绝对路径
  * @returns
  */
-export declare function getInfo(rootPath: string, parentPath: string): Info;
+export declare function getInfo(rootPath: string, currentPath: string): Info;
 export {};

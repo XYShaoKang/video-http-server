@@ -28,24 +28,25 @@ type Info = DirInfo | FileInfo
 
 /**
  *
- * @param parentPath 当前路径,相对路径
+ * @param rootPath Web 的根目录,绝对路径,用来定位当前路径
+ * @param currentPath 当前路径,绝对路径
  * @returns
  */
-export function getInfo(rootPath: string, parentPath: string): Info {
-  const relativePath = '/' + path.relative(rootPath, parentPath)
-  const parentName = relativePath === '/' ? 'root' : path.basename(parentPath)
+export function getInfo(rootPath: string, currentPath: string): Info {
+  const relativePath = '/' + path.relative(rootPath, currentPath)
+  const parentName = relativePath === '/' ? 'root' : path.basename(currentPath)
 
-  const stat = fs.statSync(parentPath)
+  const stat = fs.statSync(currentPath)
 
   const isDirectory = stat.isDirectory()
   let parentInfo: Info
 
   if (isDirectory) {
     const children = []
-    const tempList = fs.readdirSync(parentPath)
+    const tempList = fs.readdirSync(currentPath)
 
     for (let i = 0; i < tempList.length; i++) {
-      const tempPath = path.join(parentPath, tempList[i])
+      const tempPath = path.join(currentPath, tempList[i])
       const info = getInfo(rootPath, tempPath)
       let child: Child = info
       if ('children' in info) {

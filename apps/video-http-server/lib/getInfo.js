@@ -9,20 +9,21 @@ const ramda_1 = require("ramda");
 const INLUDE_TYPEs = new Set(['video/mp4']);
 /**
  *
- * @param parentPath 当前路径,相对路径
+ * @param rootPath Web 的根目录,绝对路径,用来定位当前路径
+ * @param currentPath 当前路径,绝对路径
  * @returns
  */
-function getInfo(rootPath, parentPath) {
-    const relativePath = '/' + path_1.default.relative(rootPath, parentPath);
-    const parentName = relativePath === '/' ? 'root' : path_1.default.basename(parentPath);
-    const stat = fs_1.default.statSync(parentPath);
+function getInfo(rootPath, currentPath) {
+    const relativePath = '/' + path_1.default.relative(rootPath, currentPath);
+    const parentName = relativePath === '/' ? 'root' : path_1.default.basename(currentPath);
+    const stat = fs_1.default.statSync(currentPath);
     const isDirectory = stat.isDirectory();
     let parentInfo;
     if (isDirectory) {
         const children = [];
-        const tempList = fs_1.default.readdirSync(parentPath);
+        const tempList = fs_1.default.readdirSync(currentPath);
         for (let i = 0; i < tempList.length; i++) {
-            const tempPath = path_1.default.join(parentPath, tempList[i]);
+            const tempPath = path_1.default.join(currentPath, tempList[i]);
             const info = getInfo(rootPath, tempPath);
             let child = info;
             if ('children' in info) {
