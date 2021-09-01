@@ -12,9 +12,7 @@ const clearConsole = () => {
 exports.clearConsole = clearConsole;
 let logStr = '';
 const logUpdatePrint = (str, clear) => {
-    // console.log(process.env.TS_NODE_DEV)
-    if (clear && !process.env.TS_NODE_DEV) {
-        // 开发模式下,不去覆盖之前的消息
+    if (clear) {
         logStr = str;
     }
     else {
@@ -24,6 +22,7 @@ const logUpdatePrint = (str, clear) => {
 };
 const print = (str, clear) => {
     if (process.env.TS_NODE_DEV || process.env.VSCODE_BUGGER) {
+        // 开发模式下,使用 `console.log` 来输出
         console.log(str);
     }
     else {
