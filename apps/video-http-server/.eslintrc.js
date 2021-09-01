@@ -23,6 +23,7 @@ const eslintConfig = {
   rules: {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
+  ignorePatterns: ['**/node_modules/**', 'dist', 'lib', '**/__snapshots__/**'],
 }
 
 module.exports = eslintConfig
