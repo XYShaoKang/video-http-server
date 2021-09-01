@@ -113,6 +113,7 @@ const eslintConfig = {
       },
     },
   ],
+  ignorePatterns: ['**/node_modules/**', 'dist', 'lib', '**/__snapshots__/**'],
 }
 
 module.exports = eslintConfig
