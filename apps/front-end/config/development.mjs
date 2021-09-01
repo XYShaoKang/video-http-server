@@ -1,7 +1,6 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
-import { beforeSetupMiddleware } from './mock.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -18,11 +17,10 @@ const development = {
     open: true,
     hot: true,
     historyApiFallback: { disableDotRule: true },
-    /**
-     *
-     * @param {import('webpack-dev-server')} devServer
-     */
-    onBeforeSetupMiddleware: beforeSetupMiddleware,
+    proxy: {
+      '/info': 'http://127.0.0.1:9011',
+      '/file': 'http://127.0.0.1:9011',
+    },
   },
   plugins: [new ReactRefreshWebpackPlugin()],
   devtool: 'eval-source-map',
