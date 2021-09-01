@@ -13,6 +13,8 @@ const Container = styled.div`
   width: 800px;
   height: 600px;
   box-shadow: 1px 4px 6px 2px #9e9e9e;
+  display: flex;
+  flex-direction: column;
 `
 const Header = styled.div`
   display: flex;
@@ -26,7 +28,6 @@ const Header = styled.div`
 
 const Directory: FC = () => {
   const { pathname } = useLocation()
-  console.log(pathname)
 
   const { children, currentInfo, error } = useInfo(pathname)
 
