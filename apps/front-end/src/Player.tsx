@@ -7,6 +7,9 @@ import { FileType } from './hooks/useInfo'
 const PlayerWrap = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `
 
 const PlayerRoot = styled.div`
