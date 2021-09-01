@@ -89,15 +89,9 @@ router.get('/info', async (ctx, _next) => {
   if (relativePath && typeof relativePath === 'string') {
     const absolutePath = path.join(ROOT_PATH, relativePath)
     const info = getInfoWithVideoPath(absolutePath)
-    if (info.isDirectory) {
-      ctx.response.body = {
-        msg: 'ok',
-        info,
-      }
-    } else {
-      ctx.response.body = {
-        error: 'not is directory',
-      }
+    ctx.response.body = {
+      msg: 'ok',
+      info,
     }
   } else {
     ctx.response.body = {

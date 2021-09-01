@@ -1,65 +1,74 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
+exports.router = exports.getInfoWithVideoPath = exports.getInfo = void 0;
 const tslib_1 = require("tslib");
 const fs_1 = (0, tslib_1.__importDefault)(require("fs"));
 const path_1 = (0, tslib_1.__importDefault)(require("path"));
 const mime_types_1 = (0, tslib_1.__importDefault)(require("mime-types"));
 const router_1 = (0, tslib_1.__importDefault)(require("@koa/router"));
+const ramda_1 = require("ramda");
 const router = new router_1.default();
 exports.router = router;
 const INLUDE_TYPEs = new Set(['video/mp4']);
-const VIDEO_PATH = path_1.default.join(__dirname, '../videos/');
-function getInfo(absolutePath) {
-    const stat = fs_1.default.statSync(absolutePath);
-    const list = [];
+const ROOT_PATH = path_1.default.join(__dirname, '../videos/');
+/**
+ *
+ * @param parentPath 当前路径,相对路径
+ * @returns
+ */
+function getInfo(rootPath, parentPath) {
+    const relativePath = '/' + path_1.default.relative(rootPath, parentPath);
+    const parentName = relativePath === '/' ? 'root' : path_1.default.basename(parentPath);
+    const stat = fs_1.default.statSync(parentPath);
     const isDirectory = stat.isDirectory();
+    let parentInfo;
     if (isDirectory) {
-        const tempList = fs_1.default.readdirSync(absolutePath);
+        const children = [];
+        const tempList = fs_1.default.readdirSync(parentPath);
         for (let i = 0; i < tempList.length; i++) {
-            const tempPath = path_1.default.join(absolutePath, tempList[i]);
-            const stat = fs_1.default.statSync(tempPath);
-            if (stat.isDirectory()) {
-                list.push({
-                    name: tempList[i],
-                    isDirectory: true,
-                });
+            const tempPath = path_1.default.join(parentPath, tempList[i]);
+            const info = getInfo(rootPath, tempPath);
+            let child = info;
+            if ('children' in info) {
+                child = (0, ramda_1.omit)(['children'], info);
             }
-            else {
-                const type = mime_types_1.default.lookup(tempPath);
-                if (type && INLUDE_TYPEs.has(type)) {
-                    list.push({
-                        name: tempList[i],
-                        type,
-                        relativePath: '/' + path_1.default.relative(VIDEO_PATH, tempPath),
-                    });
-                }
+            else if (!INLUDE_TYPEs.has(info.mimetype)) {
+                // 过滤其他文件,只显示视频文件
+                continue;
             }
+            children.push(child);
         }
-        return { isDirectory, children: list };
+        parentInfo = {
+            name: parentName,
+            isDirectory: true,
+            path: relativePath,
+            modified: stat.mtime,
+            children,
+        };
     }
     else {
-        const filename = path_1.default.basename(absolutePath);
-        const mimetype = mime_types_1.default.contentType(filename) || 'application/octet-stream';
-        return { isDirectory, mimetype, filename, size: stat.size };
+        parentInfo = {
+            name: parentName,
+            isDirectory: false,
+            path: relativePath,
+            modified: stat.mtime,
+            mimetype: mime_types_1.default.contentType(parentName) || 'application/octet-stream',
+            size: stat.size,
+        };
     }
+    return parentInfo;
 }
-router.get('/dir', async (ctx, _next) => {
+exports.getInfo = getInfo;
+exports.getInfoWithVideoPath = (0, ramda_1.curry)(getInfo)(ROOT_PATH);
+router.get('/info', async (ctx, _next) => {
     const { relativePath } = ctx.query;
     if (relativePath && typeof relativePath === 'string') {
-        const absolutePath = path_1.default.join(VIDEO_PATH, relativePath);
-        const info = getInfo(absolutePath);
-        if (info.isDirectory) {
-            ctx.response.body = {
-                msg: 'ok',
-                children: info.children,
-            };
-        }
-        else {
-            ctx.response.body = {
-                error: 'not is directory',
-            };
-        }
+        const absolutePath = path_1.default.join(ROOT_PATH, relativePath);
+        const info = (0, exports.getInfoWithVideoPath)(absolutePath);
+        ctx.response.body = {
+            msg: 'ok',
+            info,
+        };
     }
     else {
         ctx.response.body = {
@@ -70,8 +79,8 @@ router.get('/dir', async (ctx, _next) => {
 router.get('/file', async (ctx, _next) => {
     const { relativePath } = ctx.query;
     if (relativePath && typeof relativePath === 'string') {
-        const absolutePath = path_1.default.join(VIDEO_PATH, relativePath);
-        const info = getInfo(absolutePath);
+        const absolutePath = path_1.default.join(ROOT_PATH, relativePath);
+        const info = (0, exports.getInfoWithVideoPath)(absolutePath);
         if (info.isDirectory) {
             ctx.response.body = {
                 error: 'not is file',
