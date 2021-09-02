@@ -7,12 +7,13 @@
     "vhs": "./index.js"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/cli.ts",
-    "build": "rimraf lib/* && tsc -p tsconfig.build.json",
+    "dev": "rimraf public/* && cpy ../front-end/dist/* ./public && ts-node-dev --respawn --transpile-only src/cli.ts",
+    "build": "rimraf lib/* public/* && cpy ../front-end/dist/* ./public && tsc -p tsconfig.build.json",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check src",
     "lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
-    "test": "jest"
+    "test": "jest",
+    "clear": "rimraf lib public"
   },
   "keywords": [],
   "author": "XYShaoKang",
@@ -43,6 +44,7 @@
     "@types/yargs": "~17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
+    "cpy-cli": "^3.1.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.1",
