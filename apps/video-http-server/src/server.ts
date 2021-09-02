@@ -17,6 +17,10 @@ function createApp(rootPath: string): Koa {
   app.use(bodyParser())
   app.use(serve(CLIENT_PATH))
   app.use(router.routes()).use(router.allowedMethods())
+  app.use(
+    async (ctx, next) =>
+      await serve(CLIENT_PATH)(Object.assign(ctx, { path: 'index.html' }), next)
+  )
 
   app.on('error', error => {
     // TODO: 暂时先使用警告来代替错误
