@@ -29,6 +29,7 @@
     "yargs": "~17.1.1"
   },
   "devDependencies": {
+    "front-end":"workspace:*",
     "@types/jest": "^27.0.1",
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.3",
