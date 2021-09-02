@@ -7,7 +7,8 @@ import { getInfo } from './getInfo'
 
 function createRoute(rootPath: string): Router {
   const router = new Router()
-  const getInfoWithVideoPath = curry(getInfo)(rootPath)
+  const depth = 1
+  const getInfoWithVideoPath = curry(getInfo)(rootPath)(depth)
 
   router.get('/info', async (ctx, _next) => {
     const { relativePath } = ctx.query

@@ -29,10 +29,15 @@ type Info = DirInfo | FileInfo
 /**
  *
  * @param rootPath Web 的根目录,绝对路径,用来定位当前路径
+ * @param depth 遍历深度
  * @param currentPath 当前路径,绝对路径
  * @returns
  */
-export function getInfo(rootPath: string, currentPath: string): Info {
+export function getInfo(
+  rootPath: string,
+  depth: number,
+  currentPath: string
+): Info {
   const relativePath = '/' + path.relative(rootPath, currentPath)
   const parentName = relativePath === '/' ? 'root' : path.basename(currentPath)
 
@@ -43,20 +48,23 @@ export function getInfo(rootPath: string, currentPath: string): Info {
 
   if (isDirectory) {
     const children = []
-    const tempList = fs.readdirSync(currentPath)
 
-    for (let i = 0; i < tempList.length; i++) {
-      const tempPath = path.join(currentPath, tempList[i])
-      const info = getInfo(rootPath, tempPath)
-      let child: Child = info
-      if ('children' in info) {
-        child = omit(['children'], info)
-      } else if (!INLUDE_TYPEs.has(info.mimetype)) {
-        // 过滤其他文件,只显示视频文件
-        continue
+    if (depth > 0) {
+      const tempList = fs.readdirSync(currentPath)
+
+      for (let i = 0; i < tempList.length; i++) {
+        const tempPath = path.join(currentPath, tempList[i])
+        const info = getInfo(rootPath, depth--, tempPath)
+        let child: Child = info
+        if ('children' in info) {
+          child = omit(['children'], info)
+        } else if (!INLUDE_TYPEs.has(info.mimetype)) {
+          // 过滤其他文件,只显示视频文件
+          continue
+        }
+
+        children.push(child)
       }
-
-      children.push(child)
     }
     parentInfo = {
       name: parentName,
