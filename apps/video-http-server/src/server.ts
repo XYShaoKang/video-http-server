@@ -6,7 +6,7 @@ import http from 'http'
 
 import { createRoute } from './router'
 
-const CLIENT_PATH = path.join(__dirname, '../../front-end/dist/')
+const CLIENT_PATH = path.join(__dirname, '../public/')
 
 function createApp(rootPath: string): Koa {
   // const ROOT_PATH = path.join(__dirname, '../videos/')
