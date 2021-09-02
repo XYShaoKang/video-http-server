@@ -19,5 +19,5 @@ module.exports = {
 
     return [`eslint --fix --color --max-warnings=0 ${filesToLint}`]
   },
-  'apps/**/*.{md}': [`prettier --write`],
+  '**/*.md': [`prettier --write`],
 }
