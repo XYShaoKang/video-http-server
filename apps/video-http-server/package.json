@@ -1,11 +1,22 @@
 {
   "name": "video-http-server",
   "version": "0.0.1",
-  "description": "",
+  "license": "MIT",
+  "author": "XYShaoKang",
+  "description": "Video http server",
   "bin": {
     "video-http-server": "./index.js",
     "vhs": "./index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XYShaoKang/video-http-server.git",
+    "directory": "apps/video-http-server"
+  },
+  "bugs": {
+    "url": "https://github.com/XYShaoKang/video-http-server/issues"
+  },
+  "homepage": "https://github.com/XYShaoKang/video-http-server",
   "scripts": {
     "dev": "rimraf public/* && cpy ../front-end/dist/* ./public && ts-node-dev --respawn --transpile-only src/cli.ts",
     "build": "rimraf lib/* public/* && cpy ../front-end/dist/* ./public && tsc -p tsconfig.build.json",
@@ -15,9 +26,6 @@
     "test": "jest",
     "clear": "rimraf lib public"
   },
-  "keywords": [],
-  "author": "XYShaoKang",
-  "license": "ISC",
   "dependencies": {
     "@koa/router": "~10.1.1",
     "chalk": "~4.1.2",
