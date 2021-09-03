@@ -40,6 +40,7 @@ afterEach(() => {
 test('getInfo', async () => {
   const info = getInfo(
     path.join(__dirname, '../videos/'),
+    1,
     path.join(__dirname, '../videos/')
   )
 
