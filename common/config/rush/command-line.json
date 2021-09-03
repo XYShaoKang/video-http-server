@@ -20,6 +20,15 @@
       "summary": "Used by the pre-commit Git hook. This command invokes eslint to lint staged changes.",
       "autoinstallerName": "rush-lint",
       "shellCommand": "lint-staged"
+    },
+    {
+      "name": "test",
+      "commandKind": "bulk",
+      "summary": "Runs unit tests in each project.",
+      "description": "Runs the 'test' script within each project.json",
+      "enableParallelism": true,
+      "ignoreDependencyOrder": true,
+      "incremental": false
     }
   ],
   "parameters": []
