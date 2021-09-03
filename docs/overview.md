@@ -15,11 +15,11 @@
 
 列表页
 
-![](list.jpg)
+![](./assets/list.jpg)
 
 播放页
 
-![](play.jpg)
+![](./assets/play.jpg)
 
 ## 实现
 
