@@ -26,6 +26,11 @@
   },
   "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0",
   "ensureConsistentVersions": true,
+  "repository": {
+    "url": "https://github.com/XYShaoKang/video-http-server",
+    "defaultBranch": "master",
+    "defaultRemote": "origin"
+  },
   "projects": [
     {
       "packageName": "front-end",
