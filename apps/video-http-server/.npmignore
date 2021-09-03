@@ -1,0 +1,16 @@
+# https://docs.npmjs.com/cli/v7/using-npm/developers
+
+# 先忽略所有文件,之后再使用否定模式添加需要打包的文件
+*
+
+# 有几个文件和路径永远不会忽略,所以不用显示指定,如下:
+# - package.json
+# - README (and its variants)
+# - CHANGELOG (and its variants)
+# - LICENSE / LICENCE
+
+# 需要发布的内容
+!lib/**/*.d.ts
+!lib/**/*.js
+!public/*
+!index.js
