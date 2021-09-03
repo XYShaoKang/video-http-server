@@ -1,6 +1,6 @@
 # video-http-server
 
-video-http-server 是一个命令行工具,在任意目录启动一个服务,用以通过浏览器查目录下的视频文件.
+video-http-server 是一个命令行工具,在任意目录启动一个服务,用以通过浏览器查看目录下的视频文件.
 
 [![asciicast](https://asciinema.org/a/NcbE2NzqgN1iYc2v32r4xI9zT.svg)](https://asciinema.org/a/NcbE2NzqgN1iYc2v32r4xI9zT)
 
