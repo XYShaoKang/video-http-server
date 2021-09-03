@@ -6,7 +6,7 @@ video-http-server 是一个命令行工具,在任意目录启动一个服务,用
 
 ## 安装
 
-```
+```sh
 npm install -g video-http-server
 # or
 yarn global add video-http-server
@@ -14,7 +14,7 @@ yarn global add video-http-server
 
 ## 使用
 
-```
+```sh
 vhs
 # or
 video-http-server
