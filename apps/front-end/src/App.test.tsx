@@ -10,17 +10,53 @@ it('App render', async () => {
     .mockResolvedValueOnce(
       Promise.resolve(
         new Response(
-          `{"msg":"ok","children":[{"name":"demo.mp4","mimetype":"video/mp4","path":"/demo.mp4","modified":"2021-08-26T13:27:41.750Z","size":12228098},{"name":"temp","isDirectory":true,"path":"/temp","modified":"2021-08-26T13:27:41.750Z"}]}`,
+          JSON.stringify({
+            msg: 'ok',
+            info: {
+              name: 'root',
+              isDirectory: true,
+              path: '/',
+              modified: '2021-08-26T13:27:41.750Z',
+              children: [
+                {
+                  name: 'demo.mp4',
+                  isDirectory: false,
+                  path: '/demo.mp4',
+                  modified: '2021-08-26T13:27:41.750Z',
+                  mimetype: 'video/mp4',
+                  size: 12228098,
+                },
+                {
+                  name: 'temp',
+                  isDirectory: true,
+                  path: '/temp',
+                  modified: '2021-08-26T13:27:41.750Z',
+                },
+              ],
+            },
+          }),
           { status: 200, headers: { 'Content-type': 'application/json' } }
         )
       )
     )
     .mockResolvedValueOnce(
       Promise.resolve(
-        new Response(`{"msg":"ok","children":[]}`, {
-          status: 200,
-          headers: { 'Content-type': 'application/json' },
-        })
+        new Response(
+          JSON.stringify({
+            msg: 'ok',
+            info: {
+              name: 'temp',
+              isDirectory: true,
+              path: '/temp',
+              modified: '2021-08-26T13:27:41.750Z',
+              children: [],
+            },
+          }),
+          {
+            status: 200,
+            headers: { 'Content-type': 'application/json' },
+          }
+        )
       )
     )
 
