@@ -14,7 +14,7 @@ yarn global add video-http-server
 
 [![preview](./docs/assets/cli-preview.gif)](https://asciinema.org/a/NcbE2NzqgN1iYc2v32r4xI9zT)
 
-## About
+## 关于
 
 此存储库是一个 [monorepo](https://en.wikipedia.org/wiki/Monorepo),使用 [Rush](https://rushjs.io/) 构建.
 
