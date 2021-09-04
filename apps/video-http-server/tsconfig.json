@@ -17,5 +17,5 @@
     "sourceMap": true,
     "target": "ES2020"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "jest-config/**/*"]
 }
