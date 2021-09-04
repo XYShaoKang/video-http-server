@@ -1,3 +1,5 @@
+// source: https://github.com/microsoft/just/blob/47ecde0d578b223a8abf26eebd0eff02ff331988/packages/just-scripts/src/jest/JestReporter.ts
+
 // This doesn't have types for some reason
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { DefaultReporter } = require('@jest/reporters')
