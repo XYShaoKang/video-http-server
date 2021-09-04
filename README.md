@@ -1,6 +1,6 @@
 # video-http-server
 
-[![npm version](https://img.shields.io/npm/v/video-http-server?style=flat-square)](https://www.npmjs.com/package/video-http-server) [![Build Status](https://app.travis-ci.com/XYShaoKang/video-http-server.svg?branch=master)](https://app.travis-ci.com/XYShaoKang/video-http-server)
+[![npm version][npm-version-img]][npm-version-link] [![Build Status][travis-build-status-img]][travis-build-status-link]
 
 video-http-server 是一个命令行工具,在任意目录启动一个服务,用以通过浏览器查看目录下的视频文件.
 
@@ -25,7 +25,12 @@ yarn global add video-http-server
 
 ## 项目列表
 
-| Folder                                        | Version                                                                                                                             | Changelog                                       | Description                    |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------ |
-| [video-http-server](./apps/video-http-server) | [![npm version](https://img.shields.io/npm/v/video-http-server?style=flat-square)](https://www.npmjs.com/package/video-http-server) | [change](./apps/video-http-server/CHANGELOG.md) | Video http server              |
-| [front-end](./apps/front-end)                 | (local project)                                                                                                                     |                                                 | video-http-server 所使用的前端 |
+| Folder                                        | Version                                             | Changelog                                       | Description                    |
+| --------------------------------------------- | --------------------------------------------------- | ----------------------------------------------- | ------------------------------ |
+| [video-http-server](./apps/video-http-server) | [![npm version][npm-version-img]][npm-version-link] | [change](./apps/video-http-server/CHANGELOG.md) | Video http server              |
+| [front-end](./apps/front-end)                 | (local project)                                     |                                                 | video-http-server 所使用的前端 |
+
+[npm-version-img]: https://img.shields.io/npm/v/video-http-server?style=flat-square
+[npm-version-link]: https://www.npmjs.com/package/video-http-server
+[travis-build-status-img]: https://app.travis-ci.com/XYShaoKang/video-http-server.svg?branch=master
+[travis-build-status-link]: https://app.travis-ci.com/XYShaoKang/video-http-server
