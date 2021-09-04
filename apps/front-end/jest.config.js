@@ -2,6 +2,7 @@
 const config = {
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  reporters: ['./src/JestReporter.js'],
   testMatch: ['**/src/**/*.test.ts?(x)'],
   transform: {
     '^.+\\.[jt]sx?$': 'babel-jest',
