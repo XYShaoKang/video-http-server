@@ -20,8 +20,8 @@ yarn global add video-http-server
 
 ## 文档
 
-- [概述](./doc/overview.md)
-- [维护指南](./doc/maintainers.md)
+- [概述](./docs/overview.md)
+- [维护指南](./docs/maintainers.md)
 
 ## 项目列表
 
