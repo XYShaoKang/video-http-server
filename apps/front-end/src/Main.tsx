@@ -41,7 +41,7 @@ const Directory: FC = () => {
       <Header>
         <Nav>
           {dirs.map((name, i) => (
-            <Link to={dirs.slice(1, i + 1).join('/')} key={i}>
+            <Link to={'/' + dirs.slice(1, i + 1).join('/')} key={i}>
               {name}
             </Link>
           ))}
