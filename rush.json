@@ -40,6 +40,10 @@
       "packageName": "video-http-server",
       "projectFolder": "apps/video-http-server",
       "shouldPublish": true
+    },
+    {
+      "packageName": "qingfuwu",
+      "projectFolder": "apps/qingfuwu"
     }
   ]
 }
