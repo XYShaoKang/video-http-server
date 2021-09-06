@@ -29,6 +29,7 @@ yarn global add video-http-server
 | --------------------------------------------- | --------------------------------------------------- | ----------------------------------------------- | ------------------------------ |
 | [video-http-server](./apps/video-http-server) | [![npm version][npm-version-img]][npm-version-link] | [change](./apps/video-http-server/CHANGELOG.md) | Video http server              |
 | [front-end](./apps/front-end)                 | (local project)                                     |                                                 | video-http-server 所使用的前端 |
+| [qingfuwu](./apps/front-end)                  | (local project)                                     |                                                 | 用以预览前端界面               |
 
 [npm-version-img]: https://img.shields.io/npm/v/video-http-server?style=flat-square
 [npm-version-link]: https://www.npmjs.com/package/video-http-server
