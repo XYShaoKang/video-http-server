@@ -1,0 +1,82 @@
+{
+  "name": "video-http-server",
+  "entries": [
+    {
+      "version": "0.1.1",
+      "tag": "video-http-server_v0.1.1",
+      "date": "Mon, 06 Sep 2021 08:57:57 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix(front-end): fix nav link"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.1.0",
+      "tag": "video-http-server_v0.1.0",
+      "date": "Sat, 04 Sep 2021 01:05:06 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "test"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.0.2",
+      "tag": "video-http-server_v0.0.2",
+      "date": "Fri, 03 Sep 2021 02:02:56 GMT",
+      "comments": {}
+    },
+    {
+      "version": "0.0.1",
+      "tag": "video-http-server_v0.0.1",
+      "date": "Thu, 02 Sep 2021 10:26:33 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "feat(front-end): completion list page"
+          },
+          {
+            "comment": "feat(front-end): handle error"
+          },
+          {
+            "comment": "feat(front-end): completion play page"
+          },
+          {
+            "comment": "feat(front-end): completion play page"
+          },
+          {
+            "comment": "perf(front-end): adjust padding"
+          },
+          {
+            "comment": "feat(video-http-server): completion cli launch"
+          },
+          {
+            "comment": "feat(video-http-server): add configure root directory"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "fix(video-http-server): fix info api"
+          },
+          {
+            "comment": "fix(video-http-server): fix route file info"
+          },
+          {
+            "comment": "fix(front-end): prevent overflow of lists that are too long"
+          },
+          {
+            "comment": "fix(video-http-server): fix depth"
+          },
+          {
+            "comment": "fix(video-http-server): fix single-page application"
+          }
+        ]
+      }
+    }
+  ]
+}
