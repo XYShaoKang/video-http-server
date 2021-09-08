@@ -1,0 +1,56 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup git user
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Verify Change Logs
+        run: node common/scripts/install-run-rush.js change --verify
+
+      - name: Rush Check
+        run: node common/scripts/install-run-rush.js check
+
+      - name: Rush Installing
+        run: node common/scripts/install-run-rush.js install
+
+      - name: Rush Building
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+
+        # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
+        # https://docs.github.com/en/actions/reference/environment-variables#determining-when-to-use-default-environment-variables-or-contexts
+      - name: Rush Version
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: node common/scripts/install-run-rush.js version --bump --target-branch master
+
+      - name: Rush Publish
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: node common/scripts/install-run-rush.js publish --publish --include-all --target-branch master
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
