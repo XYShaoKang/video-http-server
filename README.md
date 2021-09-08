@@ -1,6 +1,6 @@
 # video-http-server
 
-[![npm version][npm-version-img]][npm-version-link] [![Build Status][travis-build-status-img]][travis-build-status-link] ![GitHub code size in bytes][github-code-size-img] ![GitHub License][github-license-img] ![GitHub last commit][github-last-commit-img]
+[![npm version][npm-version-img]][npm-version-link] ![GitHub code size in bytes][github-code-size-img] ![GitHub License][github-license-img] ![GitHub last commit][github-last-commit-img] [![GitHub Workflow Status][github-action-status-img]][github-action-status-link]
 
 video-http-server 是一个命令行工具,在任意目录启动一个服务,用以通过浏览器查看目录下的视频文件.
 
@@ -32,8 +32,8 @@ yarn global add video-http-server
 
 [npm-version-img]: https://img.shields.io/npm/v/video-http-server?style=flat-square
 [npm-version-link]: https://www.npmjs.com/package/video-http-server
-[travis-build-status-img]: https://app.travis-ci.com/XYShaoKang/video-http-server.svg?branch=master
-[travis-build-status-link]: https://app.travis-ci.com/XYShaoKang/video-http-server
+[github-action-status-img]: https://github.com/XYShaoKang/video-http-server/actions/workflows/publish.yml/badge.svg
+[github-action-status-link]: https://github.com/XYShaoKang/video-http-server/actions
 [github-code-size-img]: https://img.shields.io/github/languages/code-size/xyshaokang/video-http-server?style=flat-square
 [github-license-img]: https://img.shields.io/github/license/xyshaokang/video-http-server?style=flat-square
 [github-last-commit-img]: https://img.shields.io/github/last-commit/xyshaokang/video-http-server?style=flat-square
