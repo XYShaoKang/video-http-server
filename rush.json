@@ -26,6 +26,19 @@
   },
   "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0",
   "ensureConsistentVersions": true,
+  "gitPolicy": {
+    "allowedEmailRegExps": [
+      "[^@]+@users\\.noreply\\.github\\.com",
+      "travis@example\\.org"
+    ],
+    "sampleEmail": "mrexample@users.noreply.github.com",
+    /**
+     * 在自动提交的消息中添加 [skip ci],避免 GitHub Action 陷入重复构建的死循环里
+     * https://github.blog/changelog/2021-02-08-github-actions-skip-pull-request-and-push-workflows-with-skip-ci/
+     */
+    "versionBumpCommitMessage": "chore: applying package updates. [skip ci]",
+    "changeLogUpdateCommitMessage": "chore: deleting change files and updating change logs for package updates. [skip ci]"
+  },
   "repository": {
     "url": "https://github.com/XYShaoKang/video-http-server",
     "defaultBranch": "master",
