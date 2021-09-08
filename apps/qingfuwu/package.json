@@ -24,7 +24,7 @@
     ".gitignore"
   ],
   "dependencies": {
-    "@byteinspire/api": "~1.0.5",
+    "@byteinspire/api": "1.0.5",
     "@byteinspire/db": "~1.0.5",
     "@byteinspire/file": "~1.0.5",
     "@koa/router": "~10.1.1",
