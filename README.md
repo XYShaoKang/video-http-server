@@ -16,7 +16,7 @@ yarn global add video-http-server
 
 ## 关于
 
-此存储库是一个 [monorepo](https://en.wikipedia.org/wiki/Monorepo),使用 [Rush](https://rushjs.io/) 构建.
+此仓库是一个 [monorepo](https://en.wikipedia.org/wiki/Monorepo),使用 [Rush](https://rushjs.io/) 构建.
 
 ## 文档
 
