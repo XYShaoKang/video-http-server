@@ -40,6 +40,9 @@ const Row = styled.div<{ $showBackground: boolean }>`
 const Cell = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width ?? ''};
   padding-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 
 type Field = 'name' | 'modified' | 'size' | 'mimetype'
