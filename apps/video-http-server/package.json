@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/XYShaoKang/video-http-server",
   "scripts": {
-    "dev": "rimraf public/* && cpy ../front-end/dist/* ./public && ts-node-dev --respawn --transpile-only src/cli.ts",
+    "dev": "rimraf public/* && cpy ../front-end/dist/* ./public && ts-node-dev --respawn --transpile-only src/cli.ts ../front-end/static",
     "build": "rimraf lib/* public/* && cpy ../front-end/dist/* ./public && tsc -p tsconfig.build.json",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check src",
