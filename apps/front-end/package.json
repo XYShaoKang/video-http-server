@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --node-env development",
-    "dev": "../video-http-server/index.js & webpack serve --node-env development",
+    "dev": "../video-http-server/index.js ./static & webpack serve --node-env development",
     "build": "webpack --node-env production",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check src",
