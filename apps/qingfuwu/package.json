@@ -16,7 +16,8 @@
   "scripts": {
     "start": "inspirecloud dev",
     "build": "rimraf lib/* public/* && cpy ../front-end/dist/* ./public && tsc -p tsconfig.build.json",
-    "deploy": "inspirecloud deploy"
+    "deploy": "inspirecloud deploy",
+    "test": "echo done"
   },
   "files": [
     "*",
