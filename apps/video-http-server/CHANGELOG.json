@@ -2,6 +2,18 @@
   "name": "video-http-server",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "video-http-server_v0.1.2",
+      "date": "Fri, 10 Sep 2021 15:09:34 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "front-end: Perfect long text display"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "video-http-server_v0.1.1",
       "date": "Mon, 06 Sep 2021 08:57:57 GMT",
