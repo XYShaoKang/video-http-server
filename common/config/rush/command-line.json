@@ -12,6 +12,7 @@
       "commandKind": "global",
       "summary": "Used by the commit-msg Git hook. This command invokes commitlint to lint commit message.",
       "autoinstallerName": "rush-lint",
+      "safeForSimultaneousRushProcesses":true,
       "shellCommand": "node common/autoinstallers/rush-lint/commit-lint.js"
     },
     {
@@ -19,6 +20,7 @@
       "commandKind": "global",
       "summary": "Used by the pre-commit Git hook. This command invokes eslint to lint staged changes.",
       "autoinstallerName": "rush-lint",
+      "safeForSimultaneousRushProcesses":true,
       "shellCommand": "lint-staged"
     },
     {
