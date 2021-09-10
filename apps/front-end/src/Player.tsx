@@ -32,7 +32,7 @@ const Player: FC<ErrorType> = ({ info }) => {
       })
     }
     return () => {
-      player.destroy(false)
+      player && player.destroy(false)
     }
   }, [])
 
