@@ -1,9 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Link from './Link'
 import Typography from './Typography'
 import { StatType } from './hooks/useInfo'
+import Tooltip from './Tooltip'
+import { throttle } from './tools'
 
 const Container = styled.div`
   width: 100%;
@@ -59,6 +61,36 @@ interface ListProps {
 }
 
 const List: FC<ListProps> = ({ data }) => {
+  const [hoverText, setHoverText] = useState('')
+  const [point, setPoint] = useState({ x: 0, y: 0 })
+
+  const createMouseEnterHandler = (
+    field: Field,
+    item: StatType
+  ): React.MouseEventHandler | undefined => {
+    if (field === 'name') {
+      return enterEvent => {
+        setHoverText(item[field])
+
+        const mouseMoveHandle = throttle(
+          (moveEvent: MouseEvent) => {
+            setPoint({ x: moveEvent.clientX + 10, y: moveEvent.clientY + 10 })
+          },
+          { type: 'requestAnimationFrame' }
+        )
+
+        const mouseLeaveHandle = (_leaveEvent: Event) => {
+          setHoverText('')
+          enterEvent.target.removeEventListener('mouseleave', mouseLeaveHandle)
+          document.removeEventListener('mousemove', mouseMoveHandle)
+        }
+
+        enterEvent.target.addEventListener('mouseleave', mouseLeaveHandle)
+        document.addEventListener('mousemove', mouseMoveHandle)
+      }
+    }
+  }
+
   return (
     <Container>
       <ListHeaderWrap>
@@ -77,13 +109,18 @@ const List: FC<ListProps> = ({ data }) => {
             $showBackground={i % 2 === 0}
           >
             {columns.map(({ field, width }) => (
-              <Cell key={field} $width={`${width}px`}>
+              <Cell
+                key={field}
+                $width={`${width}px`}
+                onMouseEnter={createMouseEnterHandler(field, item)}
+              >
                 {item[field] ?? '--'}
               </Cell>
             ))}
           </Row>
         ))}
       </Body>
+      {hoverText && <Tooltip {...point}>{hoverText}</Tooltip>}
     </Container>
   )
 }
