@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Link from './Link'
@@ -63,6 +63,16 @@ interface ListProps {
 const List: FC<ListProps> = ({ data }) => {
   const [hoverText, setHoverText] = useState('')
   const [point, setPoint] = useState({ x: 0, y: 0 })
+  const mouseMoveHandleRef = useRef<(moveEvent: MouseEvent) => void | null>()
+
+  useEffect(() => {
+    setHoverText('')
+    setPoint({ x: 0, y: 0 })
+    if (mouseMoveHandleRef.current) {
+      document.removeEventListener('mousemove', mouseMoveHandleRef.current)
+      mouseMoveHandleRef.current = undefined
+    }
+  }, [data])
 
   const createMouseEnterHandler = (
     field: Field,
@@ -78,6 +88,7 @@ const List: FC<ListProps> = ({ data }) => {
           },
           { type: 'requestAnimationFrame' }
         )
+        mouseMoveHandleRef.current = mouseMoveHandle
 
         const mouseLeaveHandle = (_leaveEvent: Event) => {
           setHoverText('')

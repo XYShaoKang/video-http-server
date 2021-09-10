@@ -73,8 +73,8 @@ it('App render', async () => {
 
   userEvent.click(screen.getByText(/temp/i))
 
-  await waitFor(() => {
-    expect(screen.getByText(/temp/i)).toBeInTheDocument()
+  await waitFor(async () => {
+    expect((await screen.findAllByText('temp')).length).toBe(1)
   })
   expect(screen.queryByText(/demo\.mp4/i)).not.toBeInTheDocument()
 })
