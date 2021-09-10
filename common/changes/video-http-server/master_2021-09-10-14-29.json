@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "video-http-server",
+      "comment": "front-end: Perfect long text display",
+      "type": "patch"
+    }
+  ],
+  "packageName": "video-http-server"
+}
