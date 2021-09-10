@@ -1,6 +1,13 @@
 # Change Log - video-http-server
 
-This log was last generated on Mon, 06 Sep 2021 08:57:57 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 15:09:34 GMT and should not be manually modified.
+
+## 0.1.2
+Fri, 10 Sep 2021 15:09:34 GMT
+
+### Patches
+
+- front-end: Perfect long text display
 
 ## 0.1.1
 Mon, 06 Sep 2021 08:57:57 GMT
